@@ -22,7 +22,7 @@
     {% for rr in restaurants %}
         <tr>
             <td>{{ rr.name }}
-            <td>{{ rr.opens|format_time('short', locale='fi') }}
+            <td>{{ rr.opens|format_time('short') }}
             <td>{{ rr.url }}
         </tr>
     {% endfor %}
