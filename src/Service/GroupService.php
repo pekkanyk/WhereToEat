@@ -2,11 +2,11 @@
 
 namespace App\Service;
 
-use App\Entity\Restaurant;
+use App\Entity\Group;
 use Doctrine\ORM\EntityManagerInterface;
 
 
-class RestaurantService{
+class GroupService{
     private $entityManager;
         
     public function __construct(EntityManagerInterface $entityManager)
@@ -15,27 +15,32 @@ class RestaurantService{
     }
     
     public function findAll(){
-        $db = $this->entityManager->getRepository(Restaurant::class);
-        $restaurants = $db->findall();
+        $db = $this->entityManager->getRepository(Group::class);
+        $groups = $db->findall();
         
-        return $restaurants;
+        return $groups;
     }
 
-    public function add(Restaurant $restaurant){
-        $db = $this->entityManager->getRepository(Restaurant::class);
-        $this->entityManager->persist($restaurant);
+    public function get(int $id){
+        $db = $this->entityManager->getRepository(Group::class);
+        return $db->find($id);
+    }
+
+    public function add(Group $group){
+        $db = $this->entityManager->getRepository(Group::class);
+        $this->entityManager->persist($group);
         $this->entityManager->flush();
 
     }
     
     public function del(int $id){
-        $db = $this->entityManager->getRepository(Restaurant::class);
+        $db = $this->entityManager->getRepository(Group::class);
         $tobeDeleted = $db->find($id);
         if ($tobeDeleted != null){
             $this->entityManager->remove($tobeDeleted);
             $this->entityManager->flush();
         }
     }
-    
+
     
 }

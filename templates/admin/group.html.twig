@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WTE - Groups{% endblock %}
+
+{% block body %}
+
+
+<div class=container>
+<div class=row>
+    <div class="col-md-8">
+    
+    <table class="table">
+        <caption>Add new</caption>
+        <thead>
+        <tr>
+            <th>Group</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tr>
+        {{ form_start(form) }}
+            <td>{{ form_widget(form.name) }}</td>
+            <td>{{ form_row(form.submit,{'label':'Add'}) }}</td>
+        {{ form_end(form)}}
+        </tr>
+    </table>
+    </div>
+</div>
+<div class=row>
+    <div class="col-md-12">
+    <table class="table">
+        <caption>In database</caption>
+        <thead>
+        <tr>
+            <th>Group name</th>
+            <th></th>
+        </tr>
+        </thead>
+    {% for grp in groups %}
+        <tr>
+            <td>{{ grp.name }}</td>
+            <td><a href="/admin/group/del/{{grp.id}}"><img src=/gfx/ico_remove.gif></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WTE - Account{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-12">Käyttäjänimi: [TODO]</div>
+        <div class="col-md-4 col-sm-12">Oma ryhmä: {{ form_start(form, {'action': path('save_group'), 'method': 'POST'}) }}{{form_widget(form.name)}}{{form_widget(form.submit,{'label': 'Save'})}}{{form_rest(form)}}</div>
+        <div class="col-md-4 col-sm-12"></div>
+        <div class="col-md-4 col-sm-12">Salasanan vaihto: [TODO]</div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WTE - Restaurants{% endblock %}
+
+{% block body %}
+
+
+<div class=container>
+<div class=row>
+    <div class="col-md-8">
+    
+    <table class="table">
+        <caption>Add new</caption>
+        <thead>
+        <tr>
+            <th>Restaurant</th>
+            <th>Opens</th>
+            <th>url</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tr>
+        {{ form_start(form) }}
+            <td>{{ form_widget(form.name) }}</td>
+            <td>{{ form_widget(form.opens) }}</td>
+            <td>{{ form_widget(form.url) }}</td>
+            <td>{{ form_row(form.submit,{'label':'Add'}) }}</td>
+        {{ form_end(form)}}
+        </tr>
+    </table>
+    </div>
+</div>
+<div class=row>
+    <div class="col-md-12">
+    <table class="table">
+        <caption>In database</caption>
+        <thead>
+        <tr>
+            <th>Restaurant</th>
+            <th>Opens</th>
+            <th>url</th>
+            <th></th>
+        </tr>
+        </thead>
+    {% for rr in restaurants %}
+        <tr>
+            <td>{{ rr.name }}</td>
+            <td>{{ rr.opens|format_time('short') }}</td>
+            <td><a href="{{ rr.url }}">{{ rr.url }}</a></td>
+            <td><a href="/admin/restaurant/del/{{rr.id}}"><img src=/gfx/ico_remove.gif></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+
+{% endblock %}

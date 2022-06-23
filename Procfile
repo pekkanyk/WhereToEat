@@ -1,1 +1,1 @@
-web: heroku-php-apache2 public/ && php bin/console doctrine:migrations:migrate
+web: heroku-php-apache2 public/ && php bin/console make:migration && php bin/console doctrine:migrations:migrate
