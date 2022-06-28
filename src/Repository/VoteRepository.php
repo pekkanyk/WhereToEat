@@ -38,7 +38,19 @@ class VoteRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    
+    public function hasUserVotedDate($user,$date): ?Vote
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.user_id = :user')
+            ->andWhere('g.date = :date')
+            ->setParameter('user', $user)
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    
 //    /**
 //     * @return Vote[] Returns an array of Vote objects
 //     */

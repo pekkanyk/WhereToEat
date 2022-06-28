@@ -37,9 +37,18 @@ class GroupService{
         $db = $this->entityManager->getRepository(Group::class);
         $tobeDeleted = $db->find($id);
         if ($tobeDeleted != null){
+            //sql poistaa myös kaikki WTE:t
+            //muuta kaikkien käyttäjien ryhmä null:ksi
             $this->entityManager->remove($tobeDeleted);
             $this->entityManager->flush();
         }
+    }
+
+    public function save(Group $group){
+        $db = $this->entityManager->getRepository(Group::class);
+        $this->entityManager->persist($group);
+        $this->entityManager->flush();
+
     }
 
     

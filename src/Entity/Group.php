@@ -35,10 +35,16 @@ class Group
      */
     private $whereToEats;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Restaurant::class)
+     */
+    private $restaurants;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->whereToEats = new ArrayCollection();
+        $this->restaurants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,6 +120,30 @@ class Group
                 $whereToEat->setGrp(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Restaurant>
+     */
+    public function getRestaurants(): Collection
+    {
+        return $this->restaurants;
+    }
+
+    public function addRestaurant(Restaurant $restaurant): self
+    {
+        if (!$this->restaurants->contains($restaurant)) {
+            $this->restaurants[] = $restaurant;
+        }
+
+        return $this;
+    }
+
+    public function removeRestaurant(Restaurant $restaurant): self
+    {
+        $this->restaurants->removeElement($restaurant);
 
         return $this;
     }

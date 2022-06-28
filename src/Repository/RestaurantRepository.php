@@ -38,6 +38,16 @@ class RestaurantRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findNotIn($group): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere(':val NOT MEMBER OF r.groups')
+            ->setParameter('val', $group)
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    /**
 //     * @return Restaurant[] Returns an array of Restaurant objects

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WTE - Users{% endblock %}
+
+{% block body %}
+
+
+<div class=container>
+<div class=row>
+    <div class="col-md-12">
+    <table class="table">
+        <caption>In database</caption>
+        <thead>
+        <tr>
+            <th>User name</th>
+            <th>Group</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.grp.name}}</a>
+            <td><a href="/admin/user/{{user.id}}/del/"><img src=/gfx/ico_remove.gif></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+
+{% endblock %}

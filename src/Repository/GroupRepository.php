@@ -39,6 +39,7 @@ class GroupRepository extends ServiceEntityRepository
         }
     }
 
+
 //    /**
 //     * @return Group[] Returns an array of Group objects
 //     */

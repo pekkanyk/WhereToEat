@@ -43,7 +43,14 @@ class AccountController extends AbstractController
         $form = $this->createForm(GroupSelectType::class, $new_group);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $group = $this->groupService->get($form->getData()->getName());
+            if ($form->getData()->getName()=='--'){
+                $group = null;
+            }
+            else{
+                $group = $this->groupService->get($form->getData()->getName());
+            }
+            
+            
             $user->setGrp($group);
             $this->userService->save($user);
             return $this->redirectToRoute('account');

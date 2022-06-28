@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Restaurant;
+use App\Entity\Group;
 use Doctrine\ORM\EntityManagerInterface;
 
 
@@ -35,6 +36,25 @@ class RestaurantService{
             $this->entityManager->remove($tobeDeleted);
             $this->entityManager->flush();
         }
+    }
+
+    public function get(int $id){
+        $db = $this->entityManager->getRepository(Restaurant::class);
+        return $db->find($id);
+    }
+
+    public function findNotIn(Group $group){
+        $db = $this->entityManager->getRepository(Restaurant::class);
+        $restaurants = $db->findNotIn($group);
+        
+        return $restaurants;
+    }
+
+    public function save(Restaurant $restaurant){
+        $db = $this->entityManager->getRepository(Restaurant::class);
+        $this->entityManager->persist($restaurant);
+        $this->entityManager->flush();
+
     }
     
     

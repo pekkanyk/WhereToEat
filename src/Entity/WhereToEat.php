@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WhereToEatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,9 +26,19 @@ class WhereToEat
 
     /**
      * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="whereToEats")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $grp;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="whereToEat")
+     */
+    private $votes;
+
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -53,6 +65,36 @@ class WhereToEat
     public function setGrp(?Group $grp): self
     {
         $this->grp = $grp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vote>
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setWhereToEat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Vote $vote): self
+    {
+        if ($this->votes->removeElement($vote)) {
+            // set the owning side to null (unless already changed)
+            if ($vote->getWhereToEat() === $this) {
+                $vote->setWhereToEat(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WTE - Groups{% endblock %}
+
+{% block body %}
+
+
+<div class=container>
+<div class=row>
+    <div class="col-md-12">
+        <a href="/admin/group/"><-- back</a>
+        <h1>{{group.name}}</h1>
+    </div>
+</div>
+<div class=row>
+    <div class="col-md-12">
+    <table class="table">
+        <caption>Available restaurants</caption>
+        <thead>
+        <tr>
+            <th>Restaurant</th>
+            <th>Add</th>
+        </tr>
+        </thead>
+    {% for restaurant in available %}
+        <tr>
+            <td>{{ restaurant.name }}</td>
+            <td><a href="/admin/group/{{group.id}}/restaurants/{{restaurant.id}}/add/"><img src=/gfx/ico_add.gif></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+<div class=row>
+    <div class="col-md-12">
+    <table class="table">
+        <caption>Restaurants in group</caption>
+        <thead>
+        <tr>
+            <th>Restaurant</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+    {% for restaurant in group.restaurants %}
+        <tr>
+            <td>{{ restaurant.name }}</td>
+            <td><a href="/admin/group/{{group.id}}/restaurants/{{restaurant.id}}/remove/"><img src=/gfx/ico_remove.gif></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+
+{% endblock %}

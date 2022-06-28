@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Where to eat?{% endblock %}
+
+{% block body %}
+
+<div class=container>
+    <div class=row>
+        <div class=col-md-12>
+            <h2>{{ today|format_date('short') }}</h2>
+            Kukaan ryhmästäsi ei ole vielä tänään kysynyt suurta kysymystä! <br>
+            {{ form_start(form) }}
+            {{ form_row(form.submit,{'label':'MISSÄ ME SYÖDÄÄN?'}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -47,7 +47,7 @@
             <td>{{ rr.name }}</td>
             <td>{{ rr.opens|format_time('short') }}</td>
             <td><a href="{{ rr.url }}">{{ rr.url }}</a></td>
-            <td><a href="/admin/restaurant/del/{{rr.id}}"><img src=/gfx/ico_remove.gif></a></td>
+            <td><a href="/admin/restaurant/{{rr.id}}/del/"><img src=/gfx/ico_remove.gif></a></td>
         </tr>
     {% endfor %}
     </table>

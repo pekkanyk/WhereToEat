@@ -33,13 +33,26 @@
         <thead>
         <tr>
             <th>Group name</th>
-            <th></th>
+            <th>Users</th>
+            <th>Delete</th>
         </tr>
         </thead>
     {% for grp in groups %}
         <tr>
-            <td>{{ grp.name }}</td>
-            <td><a href="/admin/group/del/{{grp.id}}"><img src=/gfx/ico_remove.gif></a></td>
+            <td><a href="/admin/group/{{ grp.id }}/restaurants/">{{ grp.name }}</a></td>
+            <td>
+                <ul class="nav">
+                    <li  class="nav-item dropdown">
+			        <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fa fa-user-o"></i> {{grp.users|length}}</a>
+                        <ul class="dropdown-menu">
+                            {% for user in grp.users %}					
+				            <li class="dropdown-item"> {{user.username}} </li>
+				            {% endfor %}
+                        </ul>
+                    </li>
+		        </ul>
+            </td>
+            <td><a href="/admin/group/{{grp.id}}/del/"><img src=/gfx/ico_remove.gif></a></td>
         </tr>
     {% endfor %}
     </table>

@@ -39,6 +39,33 @@ class WhereToEatRepository extends ServiceEntityRepository
         }
     }
 
+    public function findForGrpDate($id,$date): ?WhereToEat
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.grp = :grpId')
+            ->andWhere('g.date = :date')
+            ->setParameter('grpId', $id)
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /*
+    public function hasUserVotedDate($user,$date){
+        return $this->createQueryBuilder('g')
+            ->andWhere(':user NOT MEMBER OF r.')
+            ->andWhere('g.date = :date')
+            ->setParameter('user', $user)
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+*/
+  
+
+
 //    /**
 //     * @return WhereToEat[] Returns an array of WhereToEat objects
 //     */

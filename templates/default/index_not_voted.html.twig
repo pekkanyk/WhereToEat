@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Where to eat?{% endblock %}
+
+{% block body %}
+
+<div class=container>
+    <div class=row>
+        <div class=col-md-12>
+            <h2>{{ today|format_date('short') }}</h2>
+            Et ole vielä äänestänyt.
+            {{ form_start(form) }}
+            {{ form_row(form.restaurant_id, {'label':'Valitse:'})}}
+            {{ form_row(form.submit,{'label':'Äänestä!'}) }}
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
