@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WTE - Restaurants{% endblock %}
+
+{% block body %}
+
+
+<div class=container>
+<div class=row>
+    <div class="col-md-12">
+    <table class="table">
+        <caption>Ryhmäsi ravintolat</caption>
+        <thead>
+        <tr>
+            
+            <th>Nimi</th>
+            <th>Aukeaa</th>
+            <th>URL</th>
+            <th>Menu url</th>
+        </tr>
+        </thead>
+    {% for rr in restaurants %}
+        <tr>
+            <td>{{ rr.name }}</td>
+            <td>{{ rr.opens|format_time('short') }}</td>
+            {% if rr.url %}          
+            <td><a href="{{ rr.url }}">Kotisivu</a></td>
+            {% else %}
+            <td></td>
+            {% endif %}
+            {% if rr.menuUrl %}          
+            <td><a href="{{ rr.menuUrl }}">MENU</a></td>
+            {% else %}
+            <td></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+
+{% endblock %}

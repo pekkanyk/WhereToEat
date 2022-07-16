@@ -12,15 +12,23 @@
         <caption>In database</caption>
         <thead>
         <tr>
-            <th>User name</th>
+            <th>User email</th>
+            <th>Handle</th>
             <th>Group</th>
+            <th>Grant admin</th>
             <th>Delete</th>
         </tr>
         </thead>
     {% for user in users %}
         <tr>
             <td>{{ user.email }}</td>
+            <td>{{ user.handle }}</td>
             <td>{{ user.grp.name}}</a>
+            {% if user.isAdmin() %}
+            <td>ADMIN</td>
+            {% else %}
+            <td><a href="/admin/user/{{user.id}}/grant/"><img src=/gfx/ico_public.gif></a></td>
+            {% endif %}
             <td><a href="/admin/user/{{user.id}}/del/"><img src=/gfx/ico_remove.gif></a></td>
         </tr>
     {% endfor %}

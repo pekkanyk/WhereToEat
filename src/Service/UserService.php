@@ -27,5 +27,10 @@ class UserService{
         $this->entityManager->flush();
     }
 
+    public function get(int $id){
+        $db = $this->entityManager->getRepository(User::class);
+        return $db->find($id);
+    }
+
     
 }

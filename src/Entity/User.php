@@ -50,6 +50,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $votes;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $handle;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -185,6 +190,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getHandle(): ?string
+    {
+        return $this->handle;
+    }
+
+    public function setHandle(?string $handle): self
+    {
+        $this->handle = $handle;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        if ($this->handle == null){
+            return $this->email;
+        }
+        else {
+            return $this->handle;
+        }
+        
+    }
+    public function isAdmin()
+    {
+        return (in_array('ROLE_ADMIN', $this->getRoles()));
+
     }
 
 

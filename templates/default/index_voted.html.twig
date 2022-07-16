@@ -7,9 +7,18 @@
 <div class=container>
     <div class=row>
         <div class=col-md-12>
-            <h2>{{ today|format_date('short') }}</h2>
-            Olet äänestänyt tänään!
-            [TULOKSET]
+            <p>Tänään syödään ravintolassa:</p>
+            <h1><b>{{wte.winner.name}}</b></h1>
+            {% if wte.draw == true %}
+            <p>tasapeli, arvottu</p>
+            {% endif %}
+            <br>
+            <p>Olet äänestänyt tänään!</p>
+            <p>Ääniä: {{voteCount}}</p>
+            {% for row in restaurants %}
+            <p>{{row['votes']}} kpl - {{row['restaurant'].name}}</p>
+            {% endfor %}
+            
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@
 
 <div class=container>
 <div class=row>
-    <div class="col-md-8">
+    <div class="col-md-12">
     
     <table class="table">
         <caption>Add new</caption>
@@ -24,6 +24,7 @@
             <td>{{ form_widget(form.name) }}</td>
             <td>{{ form_widget(form.opens) }}</td>
             <td>{{ form_widget(form.url) }}</td>
+            <td>{{ form_widget(form.menu_url) }}</td>
             <td>{{ form_row(form.submit,{'label':'Add'}) }}</td>
         {{ form_end(form)}}
         </tr>
@@ -36,17 +37,27 @@
         <caption>In database</caption>
         <thead>
         <tr>
+            <th>#</th>
             <th>Restaurant</th>
             <th>Opens</th>
             <th>url</th>
-            <th></th>
+            <th>Menu url</th>
+            <th>Edit</th>
+            <th>Del</th>
         </tr>
         </thead>
     {% for rr in restaurants %}
         <tr>
+            <td>{{ rr.id }}</td>
             <td>{{ rr.name }}</td>
             <td>{{ rr.opens|format_time('short') }}</td>
             <td><a href="{{ rr.url }}">{{ rr.url }}</a></td>
+            {% if rr.menuUrl %}          
+            <td><a href="{{ rr.menuUrl }}">MENU</a></td>
+            {% else %}
+            <td></td>
+            {% endif %}
+            <td><a href="/admin/restaurant/{{rr.id}}/edit/"><img src=/gfx/ico_write.gif></a></td>
             <td><a href="/admin/restaurant/{{rr.id}}/del/"><img src=/gfx/ico_remove.gif></a></td>
         </tr>
     {% endfor %}

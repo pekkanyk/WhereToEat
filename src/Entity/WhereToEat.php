@@ -35,6 +35,16 @@ class WhereToEat
      */
     private $votes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="whereToEats")
+     */
+    private $winner;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $draw;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -95,6 +105,30 @@ class WhereToEat
                 $vote->setWhereToEat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getWinner(): ?Restaurant
+    {
+        return $this->winner;
+    }
+
+    public function setWinner(?Restaurant $winner): self
+    {
+        $this->winner = $winner;
+
+        return $this;
+    }
+
+    public function isDraw(): ?bool
+    {
+        return $this->draw;
+    }
+
+    public function setDraw(bool $draw): self
+    {
+        $this->draw = $draw;
 
         return $this;
     }

@@ -50,6 +50,13 @@ class RestaurantService{
         return $restaurants;
     }
 
+    public function findIn(Group $group){
+        $db = $this->entityManager->getRepository(Restaurant::class);
+        $restaurants = $db->findIn($group);
+        
+        return $restaurants;
+    }
+
     public function save(Restaurant $restaurant){
         $db = $this->entityManager->getRepository(Restaurant::class);
         $this->entityManager->persist($restaurant);

@@ -69,6 +69,28 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/restaurant/{id}/edit/", name="edit_restaurant")
+     */
+    public function edit_restaurant(int $id, Request $request): Response
+    {
+
+        $restaurant = $this->restaurantService->get(intval($id));
+        $form = $this->createForm(AddRestaurantType::class, $restaurant);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $restaurant->setName($form->getData()->getName());
+            $restaurant->setOpens($form->getData()->getOpens());
+            $restaurant->setUrl($form->getData()->getUrl());
+            $this->restaurantService->add($restaurant);
+            return $this->redirectToRoute('add_restaurant');
+        }
+
+        return $this->renderForm('admin/restaurantEdit.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+    /**
      * @Route("/admin/group", name="add_group")
      */
     public function add_group(Request $request): Response
@@ -154,6 +176,19 @@ class AdminController extends AbstractController
         return $this->renderForm('admin/user.html.twig', [
             'users' => $users
         ]);
+    }
+    /**
+     * @Route("/admin/user/{id}/grant", name="grant_user")
+     */
+    public function grant_user(int $id): Response
+    {
+        $user = $this->userService->get(intval($id));
+        $roles = $user->getRoles();
+        $roles[] = 'ROLE_ADMIN';
+        $user->setRoles($roles);
+        $this->userService->save($user);
+
+        return $this->redirectToRoute('add_user');
     }
 
 }

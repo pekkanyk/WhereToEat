@@ -43,10 +43,23 @@ class RestaurantRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('r')
             ->andWhere(':val NOT MEMBER OF r.groups')
             ->setParameter('val', $group)
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('r.name', 'ASC')
             ->getQuery()
             ->getResult()
         ;
+    }
+    public function findIn($group): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere(':val MEMBER OF r.groups')
+            ->setParameter('val', $group)
+            ->orderBy('r.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findAll(){
+        return $this->findBy(array(),array('name'=>'ASC'));
     }
 
 //    /**

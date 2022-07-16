@@ -50,7 +50,34 @@ class VoteRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    
+  
+    public function voteCount($wte)
+    {
+        return $this->createQueryBuilder('v')
+            ->select('COUNT (v) AS lkm')
+            ->andWhere('v.whereToEat = :wte')
+            ->setParameter('wte', $wte)
+            ->orderBy('lkm', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function topVotes($wte)
+    {
+        return $this->createQueryBuilder('v')
+            ->select('COUNT (v) AS lkm, (v.restaurant_id) AS rr')
+            ->andWhere('v.whereToEat = :wte')
+            ->groupBy('rr')
+            ->setParameter('wte', $wte)
+            ->orderBy('lkm','DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
 //    /**
 //     * @return Vote[] Returns an array of Vote objects
 //     */

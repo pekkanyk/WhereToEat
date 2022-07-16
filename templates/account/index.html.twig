@@ -5,10 +5,13 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-sm-12">Käyttäjänimi: [TODO]</div>
-        <div class="col-md-4 col-sm-12">Oma ryhmä: {{ form_start(form, {'action': path('save_group'), 'method': 'POST'}) }}{{form_widget(form.name)}}{{form_widget(form.submit,{'label': 'Save'})}}{{form_rest(form)}}</div>
+        <div class="col-md-4 col-sm-12">{{msg}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">Käyttäjänimi: {{ form_start(handle_form, {'action': path('save_handle'), 'method': 'POST'}) }}{{form_widget(handle_form.handle)}}{{form_widget(handle_form.submit,{'label': 'Save'})}}{{form_rest(handle_form)}}{{form_end(handle_form)}}</div>
+        <div class="col-md-4 col-sm-12">Oma ryhmä: {{ form_start(grp_form, {'action': path('save_group'), 'method': 'POST'}) }}{{form_widget(grp_form.name)}}{{form_widget(grp_form.submit,{'label': 'Save'})}}{{form_rest(grp_form)}}{{form_end(grp_form)}}</div>
         <div class="col-md-4 col-sm-12"></div>
-        <div class="col-md-4 col-sm-12">Salasanan vaihto: [TODO]</div>
+        <div class="col-md-4 col-sm-12">Salasanan vaihto:{{form(pass_form, {'action': path('save_pass'), 'method': 'POST'})}}</div></div>
     </div>
 </div>
 {% endblock %}

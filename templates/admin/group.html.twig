@@ -46,7 +46,7 @@
 			        <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fa fa-user-o"></i> {{grp.users|length}}</a>
                         <ul class="dropdown-menu">
                             {% for user in grp.users %}					
-				            <li class="dropdown-item"> {{user.username}} </li>
+				            <li class="dropdown-item">&nbsp;{{user.getName()}}&nbsp; </li>
 				            {% endfor %}
                         </ul>
                     </li>

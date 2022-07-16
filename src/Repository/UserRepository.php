@@ -23,6 +23,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
+    public function findAll(){
+        return $this->findBy(array(),array('grp'=>'ASC'));
+    }
 
     public function add(User $entity, bool $flush = false): void
     {

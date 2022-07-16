@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WTE - Restaurants{% endblock %}
+
+{% block body %}
+
+
+<div class=container>
+<div class=row>
+    <div class="col-md-12">
+    
+    <table class="table">
+        <caption>EDIT</caption>
+        <thead>
+        <tr>
+            <th>Restaurant</th>
+            <th>Opens</th>
+            <th>url</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tr>
+        {{ form_start(form) }}
+            <td>{{ form_widget(form.name) }}</td>
+            <td>{{ form_widget(form.opens) }}</td>
+            <td>{{ form_widget(form.url) }}</td>
+            <td>{{ form_widget(form.menu_url) }}</td>
+            <td>{{ form_row(form.submit,{'label':'Save'}) }}</td>
+        {{ form_end(form)}}
+        </tr>
+    </table>
+    </div>
+</div>
+</div>
+
+{% endblock %}

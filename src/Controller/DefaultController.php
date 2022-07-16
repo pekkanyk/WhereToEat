@@ -51,7 +51,7 @@ class DefaultController extends AbstractController
             return $this->redirectToRoute('app_default');
             
         }
-        return $this->redirectToRoute('account');
+        return $this->redirectToRoute('app_default');
         
     }
 
@@ -68,7 +68,7 @@ class DefaultController extends AbstractController
             return $this->redirectToRoute('app_default');
             
         }
-        return $this->redirectToRoute('account');
+        return $this->redirectToRoute('app_default');
         
     }
 }

@@ -21,6 +21,10 @@ class GroupRepository extends ServiceEntityRepository
         parent::__construct($registry, Group::class);
     }
 
+    public function findAll(){
+        return $this->findBy(array(),array('name'=>'ASC'));
+    }
+
     public function add(Group $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

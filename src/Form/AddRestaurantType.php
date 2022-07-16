@@ -16,6 +16,7 @@ class AddRestaurantType extends AbstractType
             ->add('name')
             ->add('opens')
             ->add('url')
+            ->add('menu_url')
             ->add('submit', SubmitType::class)
         ;
     }
