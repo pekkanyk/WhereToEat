@@ -25,7 +25,7 @@ class Vote
 
     /**
      * @ORM\ManyToOne(targetEntity=Restaurant::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $restaurant_id;
 

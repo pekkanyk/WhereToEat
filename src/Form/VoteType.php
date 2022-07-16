@@ -28,7 +28,7 @@ class VoteType extends AbstractType
         $db = $this->entityManager->getRepository(Group::class);
         $usersGroup = $this->security->getUser()->getGrp();
         $groupsRestaurants = $db->find($usersGroup->getId())->getRestaurants();
-        $grpRestArr=[];
+        $grpRestArr['Eväs / skip']= '--';
         for ($i=0;$i<count($groupsRestaurants);$i++){
             $grpRestArr[$groupsRestaurants[$i]->getName()] = $groupsRestaurants[$i]->getId();
         }

@@ -47,6 +47,7 @@ class DefaultService{
                     $page['data']['voteCount'] = $this->voteCount($wte);
                     $page['data']['restaurants'] = $this->votes($wte);
                     $page['data']['wte'] = $wte;
+                    $page['data']['members'] = count($user->getGrp()->getUsers());
                 }
             }
         }
@@ -73,7 +74,7 @@ class DefaultService{
 
     }
     
-    public function vote(User $user, int $restaurant){
+    public function vote(User $user, $restaurant){
         $wteDb = $this->entityManager->getRepository(WhereToEat::class);
         $voteDb = $this->entityManager->getRepository(Vote::class);
         $restDb = $this->entityManager->getRepository(Restaurant::class);
@@ -82,9 +83,15 @@ class DefaultService{
         $wte = $wteDb->findForGrpDate($user->getGrp(),$today);
         
         if ($wte != null ){
+            
             $vote = new Vote;
             $vote->setUserId($user);
-            $vote->setRestaurantId($restDb->find($restaurant));
+            if ($restaurant!='--'){
+                $vote->setRestaurantId($restDb->find($restaurant));
+            }
+            else{
+                $vote->setRestaurantId(null);
+            }
             $vote->setDate($today);
             $vote->setWhereToEat($wte);
             $this->entityManager->persist($vote);

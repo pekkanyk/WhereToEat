@@ -69,6 +69,7 @@ class VoteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->select('COUNT (v) AS lkm, (v.restaurant_id) AS rr')
             ->andWhere('v.whereToEat = :wte')
+            ->andWhere('v.restaurant_id IS NOT NULL')
             ->groupBy('rr')
             ->setParameter('wte', $wte)
             ->orderBy('lkm','DESC')
