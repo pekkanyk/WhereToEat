@@ -96,34 +96,42 @@ class DefaultService{
             $vote->setWhereToEat($wte);
             $this->entityManager->persist($vote);
             $this->entityManager->flush();
-            $wte = $this->currentWinner($wte);
-            $vote->setWhereToEat($wte);    
-            $this->entityManager->persist($vote);
-            $this->entityManager->flush();
+            $wte = $this->currentWinner($wte,$restaurant);
+            //$vote->setWhereToEat($wte);    
+            //$this->entityManager->persist($vote);
+            //$this->entityManager->flush();
         }
 
     }
 
-    private function currentWinner(WhereToEat $wte){
+    private function currentWinner(WhereToEat $wte,$restId){
         $voteDb = $this->entityManager->getRepository(Vote::class);
         $restDb = $this->entityManager->getRepository(Restaurant::class);
         $topRestaurants = $voteDb->topVotes($wte);
         $topScore = $topRestaurants[0]['lkm'];
         $winnerId = 0;
-        $drawCount = 0;
-        for ($i=1;$i<count($topRestaurants);$i++){
+        $drawCount = -1;
+        $activateDice = false;
+        for ($i=0;$i<count($topRestaurants);$i++){
             if ($topRestaurants[$i]['lkm']==$topScore){
                 $drawCount++;
+                if ($topRestaurants[$i]['rr']==$restId){
+                    $activateDice = true;
+                }
             }
         }
+
         if ($drawCount>0){
+            if ($activateDice){
             $wte->setDraw(true);
             $winnerId = rand(0,$drawCount);
             $restaurant = $restDb->find($topRestaurants[$winnerId]['rr']);
             $wte->setWinner($restaurant);
             $this->entityManager->persist($wte);
             $this->entityManager->flush();
+            }
         }
+        
         else{
             $restaurant = $restDb->find($topRestaurants[0]['rr']);
             $wte->setWinner($restaurant);
