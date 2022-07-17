@@ -10,8 +10,18 @@
             <p>Olet äänestänyt tänään!</p>
             <p>Näillä äänillä tänään syödään ravintolassa:</p>
             {% if wte.winner != null %}
-            <h1><b>{{wte.winner.name}}</b></h1>
-            <p>Ravintola aukeaa klo {{wte.winner.opens|format_time('short')}}</p>
+            <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-4 col-lg-10 d-flex justify-content-center">
+                <div class="justify-content-center">
+                    <div class="col-6 col-sm-12 col-lg-4 text-center winner">
+                        <h1><b>{{wte.winner.name}}</b></h1>
+                        <p>Ravintola aukeaa klo {{wte.winner.opens|format_time('short')}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
             {% else  %}
             <h1><b>--</b></h1>
             {% endif %}

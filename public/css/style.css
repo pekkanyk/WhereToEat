@@ -1,6 +1,13 @@
 .bottom-buffer {
     margin-bottom: 20px;
 }
+.winner {
+	background-color: #f0cb95;
+	border: #000000;
+	border-radius: 10%;
+	border-style: double;
+	border-width: 10px;
+}
 
 a.deleted:link,
 a.deleted:visited,
