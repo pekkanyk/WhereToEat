@@ -10,7 +10,7 @@
 <div class=row>
     <div class="col-md-12">
     <table class="table">
-        <caption>Kaikki ravintolat</caption>
+        <caption>Lisättävissä olevat ravintolat</caption>
         <thead>
         <tr>
             <th>Restaurant</th>
@@ -20,13 +20,17 @@
     {% for restaurant in available %}
         <tr>
             <td>{{ restaurant.name }}</td>
+            {% if group != null%}
             <td><a href="/restaurants/group/{{group.id}}/restaurants/{{restaurant.id}}/add/"><img src=/gfx/ico_add.gif></a></td>
+            {% else %}
+            <td></td>
+            {% endif %}
         </tr>
     {% endfor %}
     </table>
     </div>
 </div>
-
+{% if group != null %}
 <div class=row>
     <div class="col-md-12">
     <table class="table">
@@ -40,6 +44,7 @@
             <th>Menu url</th>
         </tr>
         </thead>
+    
     {% for rr in group.restaurants %}
         <tr>
             <td>{{ rr.name }}</td>
@@ -59,6 +64,7 @@
     </table>
     </div>
 </div>
+{% endif %}
 </div>
 
 {% endblock %}

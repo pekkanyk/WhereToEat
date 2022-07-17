@@ -35,7 +35,13 @@ class RestaurantController extends AbstractController
     public function restaurants(): Response
     {
         $usersGrp = $this->security->getUser()->getGrp();
-        $available_restaurants = $this->restaurantService->findNotIn($usersGrp);
+        if ($usersGrp != null){
+            $available_restaurants = $this->restaurantService->findNotIn($usersGrp);
+        }
+        else{
+            $available_restaurants = $this->restaurantService->findAll();
+        }
+        
         /*
         if ($usersGrp == null){
             $group_restaurants = [];
