@@ -22,7 +22,7 @@ class DefaultService{
 
     public function getPage(bool $loggedIn){
         $today = date_create("now", new \DateTimeZone('Europe/Helsinki'));
-        $today->setTime(0,0);
+        $today->setTime(12,0);
         $page['data'] = ['today' => $today];
 
         if ($loggedIn){
@@ -61,7 +61,7 @@ class DefaultService{
     public function newWte(User $user){
         $wteDb = $this->entityManager->getRepository(WhereToEat::class);
         $today = date_create("now", new \DateTimeZone('Europe/Helsinki'));
-        $today->setTime(0,0);
+        $today->setTime(12,0);
 
         if ($wteDb->findForGrpDate($user->getGrp(),$today) == null ){
             $wte = new WhereToEat();
@@ -79,7 +79,7 @@ class DefaultService{
         $voteDb = $this->entityManager->getRepository(Vote::class);
         $restDb = $this->entityManager->getRepository(Restaurant::class);
         $today = date_create("now", new \DateTimeZone('Europe/Helsinki'));
-        $today->setTime(0,0);
+        $today->setTime(12,0);
         $wte = $wteDb->findForGrpDate($user->getGrp(),$today);
         
         if ($wte != null ){
@@ -108,6 +108,7 @@ class DefaultService{
         $voteDb = $this->entityManager->getRepository(Vote::class);
         $restDb = $this->entityManager->getRepository(Restaurant::class);
         $topRestaurants = $voteDb->topVotes($wte);
+        if ($topRestaurants != null){
         $topScore = $topRestaurants[0]['lkm'];
         $winnerId = 0;
         $drawCount = -1;
@@ -120,7 +121,7 @@ class DefaultService{
                 }
             }
         }
-
+        
         if ($drawCount>0){
             if ($activateDice){
             $wte->setDraw(true);
@@ -139,6 +140,8 @@ class DefaultService{
             $this->entityManager->persist($wte);
             $this->entityManager->flush();
         }
+        }
+        
 
         return $wte;
     }
