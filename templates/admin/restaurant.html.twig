@@ -16,7 +16,7 @@
             <th>Restaurant</th>
             <th>Opens</th>
             <th>url</th>
-            <th></th>
+            <th>menu url</th>
         </tr>
         </thead>
         <tr>
@@ -37,7 +37,7 @@
         <caption>In database</caption>
         <thead>
         <tr>
-            <th>#</th>
+            
             <th>Restaurant</th>
             <th>Opens</th>
             <th>url</th>
@@ -48,7 +48,7 @@
         </thead>
     {% for rr in restaurants %}
         <tr>
-            <td>{{ rr.id }}</td>
+            
             <td>{{ rr.name }}</td>
             <td>{{ rr.opens|format_time('short') }}</td>
             <td><a href="{{ rr.url }}">{{ rr.url }}</a></td>

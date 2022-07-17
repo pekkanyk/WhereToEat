@@ -6,54 +6,57 @@
 
 
 <div class=container>
-
 <div class=row>
     <div class="col-md-12">
+    
     <table class="table">
-        <caption>Kaikki ravintolat</caption>
+        <caption>Add new</caption>
         <thead>
         <tr>
             <th>Restaurant</th>
-            <th>Lisää ryhmääsi</th>
+            <th>Opens</th>
+            <th>url</th>
+            <th>menu url</th>
         </tr>
         </thead>
-    {% for restaurant in available %}
         <tr>
-            <td>{{ restaurant.name }}</td>
-            <td><a href="/restaurants/group/{{group.id}}/restaurants/{{restaurant.id}}/add/"><img src=/gfx/ico_add.gif></a></td>
+        {{ form_start(form) }}
+            <td>{{ form_widget(form.name) }}</td>
+            <td>{{ form_widget(form.opens) }}</td>
+            <td>{{ form_widget(form.url) }}</td>
+            <td>{{ form_widget(form.menu_url) }}</td>
+            <td>{{ form_row(form.submit,{'label':'Add'}) }}</td>
+        {{ form_end(form)}}
         </tr>
-    {% endfor %}
     </table>
     </div>
 </div>
-
 <div class=row>
     <div class="col-md-12">
     <table class="table">
-        <caption>Ryhmäsi ravintolat</caption>
+        <caption>In database</caption>
         <thead>
         <tr>
             
-            <th>Nimi</th>
-            <th>Aukeaa</th>
-            <th>URL</th>
+            <th>Restaurant</th>
+            <th>Opens</th>
+            <th>url</th>
             <th>Menu url</th>
+            
         </tr>
         </thead>
-    {% for rr in group.restaurants %}
+    {% for rr in restaurants %}
         <tr>
+            
             <td>{{ rr.name }}</td>
             <td>{{ rr.opens|format_time('short') }}</td>
-            {% if rr.url %}          
-            <td><a href="{{ rr.url }}">Kotisivu</a></td>
-            {% else %}
-            <td></td>
-            {% endif %}
+            <td><a href="{{ rr.url }}">{{ rr.url }}</a></td>
             {% if rr.menuUrl %}          
             <td><a href="{{ rr.menuUrl }}">MENU</a></td>
             {% else %}
             <td></td>
             {% endif %}
+            
         </tr>
     {% endfor %}
     </table>
@@ -62,4 +65,3 @@
 </div>
 
 {% endblock %}
-
