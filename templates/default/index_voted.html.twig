@@ -11,7 +11,7 @@
             <p>Näillä äänillä tänään syödään ravintolassa:</p>
             {% if wte.winner != null %}
             <h1><b>{{wte.winner.name}}</b></h1>
-            <p>Ravintola aukeaa klo {{wte.winner.opens}}</p>
+            <p>Ravintola aukeaa klo {{wte.winner.opens|format_time('short')}}</p>
             {% else  %}
             <h1><b>--</b></h1>
             {% endif %}
