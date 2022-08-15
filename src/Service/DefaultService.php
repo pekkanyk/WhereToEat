@@ -81,9 +81,9 @@ class DefaultService{
         $today = date_create("now", new \DateTimeZone('Europe/Helsinki'));
         $today->setTime(12,0);
         $wte = $wteDb->findForGrpDate($user->getGrp(),$today);
-        
-        if ($wte != null ){
-            
+        $vote = $voteDb->hasUserVotedDate($user,$today);
+
+        if ($wte != null && $vote == null){
             $vote = new Vote;
             $vote->setUserId($user);
             if ($restaurant!='--'){
@@ -103,6 +103,8 @@ class DefaultService{
         }
 
     }
+
+    
 
     private function currentWinner(WhereToEat $wte,$restId){
         $voteDb = $this->entityManager->getRepository(Vote::class);
